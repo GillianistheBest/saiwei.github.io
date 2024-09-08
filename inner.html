@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Weather</title>
+</head>
+
+<body>
+
+  <label>Enter the city</label>
+  <input type ="text" id ="city">
+  <button onclick="Submit()">Submit</button>
+
+  <p id="region"></p>
+  <p id="country"></p>
+  <p id="celsius"></p>
+  <p id="fahrenheit"></p>
+
+  <script>
+    async function Submit(){
+      var city= document.getElementById("city").value;
+  
+      var link = `https://api.weatherapi.com/v1/current.json?key=896373c9f2bb491aae0153243240701&q=${city}`;
+      var response = await fetch (link); 
+      var data = await response.json ();
+    
+      var region = data.location.region;
+      var country = data.location.country;
+      var celsius = data.current.temp_c;
+      var fahrenheit = data.current.temp_f;
+
+      document.getElementById("region").innerHTML = region;
+      document.getElementById("country").innerHTML = country;
+      document.getElementById("celsius").innerHTML = celsius + " c";
+      document.getElementById("fahrenheit").innerHTML = fahrenheit + " f";
+    }
+  </script>
+</body>
+
+</html>
